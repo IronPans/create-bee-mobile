@@ -1,0 +1,44 @@
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  font: 14px Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+  color: #666;
+  background: #F1F1F1;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  color: #fff;
+}
+
+.App-header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0;
+  background: #2196f3;
+
+  .App-logo {
+    width: 150px;
+  }
+}
+
+.App-intro {
+  padding: 20px 0;
+  text-align: center;
+  color: #333;
+}
+
+.App-btn {
+  text-align: center;
+
+  .bm-Button {
+    margin-right: 15px;
+  }
+}
