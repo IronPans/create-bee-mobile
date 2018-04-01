@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const ora = require('ora');
 const dns = require('dns');
 const spawn = require('cross-spawn');
-const currentPath = process.cwd();
+const currentPath = path.join(__dirname, '../');
 let projectName = '';
 let projectType = 'ts';
 let spinner = null;
@@ -27,50 +27,51 @@ function createApp(name, type) {
         //spinner = ora(chalk.green('Installing Dependencies...'));
         console.log();
 
-        //spinner.start();
+    updateName()
+        .then(() => {
         install().then(() => {
-            //spinner.stop();
-            updateName()
-                .then(() => {
-                    const displayedCommand = 'npm';
+        //spinner.stop();
+            const displayedCommand = 'npm';
 
-                    console.log();
-                    console.log(`Success! Created ${appName} at ${chalk.green(root)}`);
-                    console.log('Inside that directory, you can run several commands:');
-                    console.log();
-                    console.log(chalk.cyan(`  ${displayedCommand} start`));
-                    console.log('    Starts the development server.');
-                    console.log();
-                    console.log(
-                        chalk.cyan(`  ${displayedCommand} run build:prod`)
-                    );
-                    console.log('    Bundles the app into static files for production.');
-                    console.log();
-                    console.log('We suggest that you begin by typing:');
-                    console.log();
-                    console.log(chalk.cyan('  cd'), projectName);
-                    console.log(`  ${chalk.cyan(`${displayedCommand} start`)}`);
-                    if (readmeExists) {
-                        console.log();
-                        console.log(
-                            chalk.yellow(
-                                'You had a `README.md` file, we renamed it to `README.old.md`'
-                            )
-                        );
-                    }
-                    console.log();
-                    console.log('Happy hacking!');
-                    process.exit()
-                }).catch(err => {
-                console.error(
-                    `Could not update name: ${chalk.red(err)}`
+            console.log();
+            console.log(`Success! Created ${appName} at ${chalk.green(root)}`);
+            console.log('Inside that directory, you can run several commands:');
+            console.log();
+            console.log(chalk.cyan(`  ${displayedCommand} start`));
+            console.log('    Starts the development server.');
+            console.log();
+            console.log(
+                chalk.cyan(`  ${displayedCommand} run build:prod`)
+            );
+            console.log('    Bundles the app into static files for production.');
+            console.log();
+            console.log('We suggest that you begin by typing:');
+            console.log();
+            console.log(chalk.cyan('  cd'), projectName);
+            console.log(`  ${chalk.cyan(`${displayedCommand} start`)}`);
+            if (readmeExists) {
+                console.log();
+                console.log(
+                    chalk.yellow(
+                        'You had a `README.md` file, we renamed it to `README.old.md`'
+                    )
                 );
-            })
-        }).catch(err => {
-            console.error(
+            }
+            console.log();
+            console.log('Happy hacking!');
+            process.exit()
+            }).catch(err => {
+                console.error(
                 `Could not install dependencies: ${chalk.red(err)}`
             );
         })
+
+    }).catch(err => {
+            console.error(
+            `Could not update name: ${chalk.red(err)}`
+        );
+    })
+        //spinner.start();
     }).catch(err => {
         const templatePath = path.join(currentPath, 'template' + `/${projectType}`);
         console.error(
@@ -104,7 +105,7 @@ function createTemplate(root) {
 
 function updateName() {
     return new Promise((resolve, reject) => {
-        const pathName = path.resolve(currentPath, projectName, './package.json');
+        const pathName = path.resolve(process.cwd(), './package.json');
         try {
             if (fs.existsSync(pathName)) {
                 const packageJson = JSON.parse(fs.readFileSync(pathName));

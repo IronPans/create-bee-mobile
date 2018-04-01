@@ -21,8 +21,8 @@ module.exports = (options) => {
          * See: http://webpack.github.io/docs/configuration.html#entry
          */
         entry: {
-            main: helpers.root('./' + projectName + '/index.js'),
-            vendor: helpers.root('./' + projectName + '/vendor.js')
+            main: helpers.root('./' + projectName + '/index.tsx'),
+            vendor: helpers.root('./' + projectName + '/vendor.tsx')
         },
         module: {
             strictExportPresence: true,
