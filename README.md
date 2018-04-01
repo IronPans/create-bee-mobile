@@ -1,4 +1,4 @@
-# bee-cli
+# create-bee-mobile
 The Bee CLI is a command line interface tool that can create a React project.
 
 Create a new project:
